@@ -5,11 +5,11 @@ pipeline:
       - python3 test.py
   deploy:
     image: appleboy/drone-ssh
-    host: 115.159.181.16
-    username: ubuntu
+    host: linmu.date
+    username: root
     secrets: [ ssh_key ]
     port: 22
     script:
-      - cd /home/ubuntu/test
+      - cd /home/ubuntu/todo
       - git pull
       - sudo sh reload.sh
