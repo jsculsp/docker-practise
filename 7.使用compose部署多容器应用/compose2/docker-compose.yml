@@ -1,0 +1,16 @@
+version: '3'
+
+services:
+  pyweb:
+    build: .
+    ports:
+      - "9000:5000"
+    depends_on:
+      - redisdemo
+    # volumes 参数把当前目录挂载到容器的 /code
+    # docker-compose 的配置中才支持相对路径的挂载
+    volumes:
+      - .:/code
+
+  redisdemo:
+    image: "redis:alpine"

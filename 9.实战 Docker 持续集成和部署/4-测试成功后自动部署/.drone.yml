@@ -1,0 +1,15 @@
+pipeline:
+  run:
+    image: python:3.7-alpine3.8
+    commands:
+      - python3 test.py
+  deploy:
+    image: appleboy/drone-ssh
+    host: 115.159.181.16
+    username: ubuntu
+    secrets: [ ssh_key ]
+    port: 22
+    script:
+      - cd /home/ubuntu/test
+      - git pull
+      - sudo sh reload.sh

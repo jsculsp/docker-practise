@@ -1,0 +1,14 @@
+插件
+http://plugins.drone.io/
+
+
+让整个构建步骤只在某些分支发生变化的时候执行
+http://docs.drone.io/pipeline-conditions/
+
+
+让某一步动作在特定条件执行
+http://docs.drone.io/step-conditions/
+
+
+让 Drone 支持 GitHub
+http://docs.drone.io/install-for-github/

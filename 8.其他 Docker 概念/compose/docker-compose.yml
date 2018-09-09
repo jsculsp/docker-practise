@@ -1,0 +1,12 @@
+version: '3'
+
+services:
+  pyweb:
+    build: .
+    depends_on:
+      - redisdemo
+    volumes:
+      - .:/code
+
+  redisdemo:
+    image: "redis:alpine"

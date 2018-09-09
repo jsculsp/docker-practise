@@ -1,0 +1,6 @@
+version: '3'
+
+services:
+  pyweb:
+    ports:
+      - "8000:5000"

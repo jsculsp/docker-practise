@@ -1,0 +1,8 @@
+version: '3'
+
+services:
+  bash:
+    # environment 参数用于指定环境变量
+    environment:
+      - PRODUCTION
+      - NAME=prod.yml

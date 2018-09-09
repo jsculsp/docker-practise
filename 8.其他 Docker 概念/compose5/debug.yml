@@ -1,0 +1,8 @@
+version: '3'
+
+services:
+  bash:
+    # 可以使用 env_file 的形式从文件中读取环境变量
+    env_file:
+      - a.env
+      - b.env

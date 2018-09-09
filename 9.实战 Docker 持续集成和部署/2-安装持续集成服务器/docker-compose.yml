@@ -1,0 +1,45 @@
+version: '3'
+
+services:
+  server:
+    image: drone/drone:0.8.6
+    ports:
+      - 8000:8000
+    volumes:
+      - ./data/drone:/var/lib/drone/
+    restart: always
+    environment:
+      # false 表示禁止注册
+      - DRONE_OPEN=false
+      # DRONE_ADMIN 配置的用户作为管理员
+      - DRONE_ADMIN=kuaibiancheng.com
+      # 本机主机名
+      - DRONE_HOST=http://111.231.98.114
+      # 随机输入一个字符串
+      - DRONE_SECRET=random_string_123
+      # 使用 gogs 服务
+      - DRONE_GOGS=true
+      # gogs 的地址
+      - DRONE_GOGS_URL=http://111.231.98.114:3000
+      # gogs 的 git 用户名
+      - DRONE_GOGS_GIT_USERNAME=kuaibiancheng.com
+      # 密码
+      - DRONE_GOGS_GIT_PASSWORD=123
+      # 私有模式
+      - DRONE_GOGS_PRIVATE_MODE=true
+      # 关闭 ssl 验证（我们没有配置 https 访问）
+      - DRONE_GOGS_SKIP_VERIFY=true
+  agent:
+    image: drone/agent:0.8.6
+    command: agent
+    restart: always
+    depends_on:
+      - server
+    volumes:
+      # 这样才可以在容器中使用宿主机的 Docker 服务
+      - /var/run/docker.sock:/var/run/docker.sock
+    environment:
+      # secret 和上面的 DRONE_SECRET 配置一致
+      - DRONE_SECRET=random_string_123
+      # 上面的 server 服务的 9000 端口
+      - DRONE_SERVER=server:9000
